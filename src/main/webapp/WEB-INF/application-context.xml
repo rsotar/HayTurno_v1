@@ -15,7 +15,7 @@
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-    <import resource="spring-data-servlet.xml" />
+    <import resource="spring-data-context.xml" />
 
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
     <context:annotation-config />
@@ -31,7 +31,6 @@
             <ref bean="logOutbound"/>
         </cxf:outInterceptors>
     </cxf:bus>
-
 
     <!-- Rest Service Beans -->
     <bean id="userDao" class="com.hayturno.dao.UserManagerMemoryDao"/>
