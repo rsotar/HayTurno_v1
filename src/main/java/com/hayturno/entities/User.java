@@ -1,73 +1,98 @@
 package com.hayturno.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
+import java.util.Objects;
 
-public class User
-{
-	private Integer id;
-	private String name;
-	private String email;
-	private Date birthDate;
-	private String city;
-	private String state;
+@Entity
+@Table(name = "user")
+public class User {
 
-	public Integer getId()
-	{
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "iduser")
+    private Integer id;
 
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
+    @Column(name = "name")
+    private String name;
 
-	public String getName()
-	{
-		return name;
-	}
+    @Column(name = "email")
+    private String email;
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+    @Column(name = "birthdate")
+    private Date birthDate;
 
-	public String getEmail()
-	{
-		return email;
-	}
+    @Column(name = "city")
+    private String city;
 
-	public void setEmail(String email)
-	{
-		this.email = email;
-	}
+    @Column(name = "state")
+    private String state;
 
-	public Date getBirthDate()
-	{
-		return birthDate;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setBirthDate(Date birthDate)
-	{
-		this.birthDate = birthDate;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getCity()
-	{
-		return city;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setCity(String city)
-	{
-		this.city = city;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getState()
-	{
-		return state;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setState(String state)
-	{
-		this.state = state;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
 }
+

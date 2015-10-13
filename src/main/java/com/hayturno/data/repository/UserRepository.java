@@ -1,4 +1,4 @@
-package com.hayturno.dao.repository;
+package com.hayturno.data.repository;
 
 import com.hayturno.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

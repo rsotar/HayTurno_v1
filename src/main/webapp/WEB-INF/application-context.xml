@@ -20,9 +20,15 @@
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
     <context:annotation-config />
 
+    <context:property-placeholder location="classpath:${tomcat.env}/environment.properties"/>
+
+    <!--TODO: config scan for important packages-->
+    <context:component-scan base-package="com.hayturno" />
+
     <bean id="logOutbound" class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
     <bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
 
+    <!--TODO: config BUS to don't show payload in Logs-->
     <cxf:bus>
         <cxf:inInterceptors>
             <ref bean="logInbound"/>
@@ -32,18 +38,13 @@
         </cxf:outInterceptors>
     </cxf:bus>
 
-    <!-- Rest Service Beans -->
-    <bean id="userDao" class="com.hayturno.dao.UserManagerMemoryDao"/>
-    <bean id="userManagerService" class="com.hayturno.service.UserManagerService">
-        <property name="userDao" ref="userDao"/>
-    </bean>
-
+    <!-- Providers -->
     <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
 
     <!-- Rest Service exposed by app central -->
-    <jaxrs:server id="userManagerREST" address="/rest/UserManager">
+    <jaxrs:server id="userRestService" address="/UserRestService">
         <jaxrs:serviceBeans>
-            <ref bean="userManagerService"/>
+            <bean class="com.hayturno.service.endpoints.UserEndpointImpl"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean='jsonProvider' />
